@@ -1,0 +1,24 @@
+quest swap_item begin
+	state start begin
+		when 70001.receive begin
+
+			local item_to_change = 70001
+			local count_needed = 10
+
+			local reward_vnum = 19
+			local reward_count = 1
+
+			while(pc.count_item(item_to_change) >= count_needed) do
+				if not pc.enough_inventory(reward_vnum) then 
+					syschat("You don't have enough space to receive the item, free up space.")
+					syschat("After freeing up space, you will have to receive it again.")
+					break
+				end
+				pc.remove_item(item_to_change, count_needed)
+				pc.give_item2(reward_vnum, reward_count)
+				syschat(string.format("Congratulations! You have collected %s x %d! In return you will receive: %s x %d", item.get_name(item_to_change), count_needed, item.get_name(reward_vnum), reward_count ))
+			end
+
+		end
+	end
+end

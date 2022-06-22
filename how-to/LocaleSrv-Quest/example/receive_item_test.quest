@@ -1,0 +1,7 @@
+quest receive_item_test begin
+	state start begin
+		when 70001.receive begin
+			syschat(string.format("(TEST) -> Count Item: %d", pc.count_item(70001)))
+		end
+	end
+end
